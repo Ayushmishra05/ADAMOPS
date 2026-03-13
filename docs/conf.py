@@ -10,9 +10,7 @@ import sys
 # add these directories to sys.path here.
 # sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-# import adamops
-
-from importlib.metadata import version
+import importlib.metadata
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
@@ -20,10 +18,13 @@ from importlib.metadata import version
 project = 'AdamOps'
 copyright = '2026, AdamOps Team'
 author = 'AdamOps Team'
+
 try:
-    release = version('adamops')
+    release = importlib.metadata.version('adamops')
+    version = '.'.join(release.split('.')[:2])
 except Exception:
     release = '0.1.1'
+    version = '0.1'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
