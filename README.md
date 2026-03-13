@@ -4,6 +4,8 @@
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-0.1.0-orange.svg)](https://github.com/adamops/adamops)
 
+[![ADAMOPS](ADAMOPS.png)](https://pypi.org/project/adamops/)
+
 **AdamOps** is a comprehensive MLOps library for end-to-end machine learning workflows. It provides a unified interface for data processing, model training, evaluation, deployment, and monitoring.
 
 ## ✨ Features
