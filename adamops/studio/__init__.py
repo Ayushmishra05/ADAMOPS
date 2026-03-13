@@ -8,6 +8,9 @@ Usage:
     results = launch()
 """
 
-from adamops.studio.launcher import launch
+if "launch" not in locals():
+    from . import launch
+
+from .launcher import launch
 
 __all__ = ["launch"]

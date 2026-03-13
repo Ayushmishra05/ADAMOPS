@@ -9,11 +9,11 @@ Provides model deployment capabilities:
 - playground: Interactive Streamlit UI for model testing
 """
 
-from adamops.deployment import exporters
-from adamops.deployment import api
-from adamops.deployment import containerize
-from adamops.deployment import cloud
-from adamops.deployment import playground
+from . import api
+from . import containerize
+from . import cloud
+from . import exporters
+from . import playground
 
 __all__ = [
     "exporters",

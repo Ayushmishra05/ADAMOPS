@@ -6,8 +6,8 @@ Provides pipeline orchestration capabilities:
 - orchestrators: Schedule and run pipelines
 """
 
-from adamops.pipelines import workflows
-from adamops.pipelines import orchestrators
+from . import workflows
+from . import orchestrators
 
 __all__ = [
     "workflows",

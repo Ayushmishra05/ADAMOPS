@@ -19,10 +19,10 @@ __version__ = "0.1.1"
 __author__ = "AdamOps Team"
 
 # Import core modules for easy access
-from adamops.data import loaders, validators, preprocessors, splitters
-from adamops.models import modelops, registry, ensembles, automl
-from adamops.evaluation import metrics
-from adamops.utils import config, logging as adamops_logging, helpers
+from .data import loaders, validators, preprocessors, splitters
+from .models import modelops, registry, ensembles, automl
+from .evaluation import metrics
+from .utils import config, logging as adamops_logging, helpers
 
 __all__ = [
     "loaders",

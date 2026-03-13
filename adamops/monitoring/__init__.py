@@ -8,10 +8,10 @@ Provides model monitoring capabilities:
 - dashboard: Create monitoring dashboards
 """
 
-from adamops.monitoring import drift
-from adamops.monitoring import performance
-from adamops.monitoring import alerts
-from adamops.monitoring import dashboard
+from . import drift
+from . import performance
+from . import alerts
+from . import dashboard
 
 __all__ = [
     "drift",

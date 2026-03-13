@@ -9,11 +9,11 @@ Provides model evaluation capabilities:
 - reports: Generate HTML/PDF reports
 """
 
-from adamops.evaluation import metrics
-from adamops.evaluation import visualization
-from adamops.evaluation import explainability
-from adamops.evaluation import comparison
-from adamops.evaluation import reports
+from . import metrics
+from . import reports
+from . import visualization
+from . import explainability
+from . import comparison
 
 __all__ = [
     "metrics",

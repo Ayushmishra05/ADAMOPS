@@ -8,9 +8,11 @@ import sys
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here.
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+# sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-import adamops
+# import adamops
+
+from importlib.metadata import version
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
@@ -18,7 +20,10 @@ import adamops
 project = 'AdamOps'
 copyright = '2026, AdamOps Team'
 author = 'AdamOps Team'
-release = adamops.__version__
+try:
+    release = version('adamops')
+except Exception:
+    release = '0.1.1'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

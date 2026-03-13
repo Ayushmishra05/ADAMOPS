@@ -9,11 +9,11 @@ Provides comprehensive data handling capabilities:
 - splitters: Split data for training and evaluation
 """
 
-from adamops.data import loaders
-from adamops.data import validators
-from adamops.data import preprocessors
-from adamops.data import feature_engineering
-from adamops.data import splitters
+from . import loaders
+from . import validators
+from . import preprocessors
+from . import feature_engineering
+from . import splitters
 
 __all__ = [
     "loaders",
