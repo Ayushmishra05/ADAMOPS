@@ -147,11 +147,22 @@ if CLICK_AVAILABLE:
         console.print(f"Version: {__version__}")
         console.print()
         console.print("Available commands:")
-        console.print("  train     - Train a model")
-        console.print("  evaluate  - Evaluate a model")
-        console.print("  deploy    - Deploy a model")
-        console.print("  validate  - Validate data")
+        console.print("  train        - Train a model")
+        console.print("  evaluate     - Evaluate a model")
+        console.print("  deploy       - Deploy a model")
+        console.print("  validate     - Validate data")
         console.print("  run-workflow - Run a workflow")
+        console.print("  studio       - Launch visual pipeline builder")
+
+    @main.command()
+    @click.option("--host", default="127.0.0.1", help="Server host")
+    @click.option("--port", "-p", default=5555, type=int, help="Server port")
+    @click.option("--no-browser", is_flag=True, help="Don't open browser")
+    def studio(host, port, no_browser):
+        """Launch the visual pipeline builder."""
+        from adamops.studio import launch
+        console.print("[bold magenta]Launching AdamOps Studio...[/]")
+        launch(host=host, port=port, open_browser=not no_browser)
 
 else:
     def main():

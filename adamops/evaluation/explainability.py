@@ -47,7 +47,7 @@ class ShapExplainer:
             background = shap.sample(X, min(100, len(X)))
             self.explainer = shap.KernelExplainer(model.predict, background)
     
-    def explain(self, X: Optional[np.ndarray] = None) -> shap.Explanation:
+    def explain(self, X: Optional[np.ndarray] = None) -> Any:
         """Generate SHAP values."""
         X = X if X is not None else self.X[:100]
         return self.explainer(X)

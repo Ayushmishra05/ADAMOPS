@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdamOps Studio — Visual Pipeline Builder</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Bar -->
+    <header id="topbar">
+        <div class="topbar-left">
+            <div class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">AdamOps <span class="logo-accent">Studio</span></span>
+            </div>
+        </div>
+        <div class="topbar-center">
+            <button id="btn-save" class="tb-btn" title="Save Pipeline (Ctrl+S)">
+                <span>💾</span> Save
+            </button>
+            <button id="btn-load" class="tb-btn" title="Load Pipeline">
+                <span>📂</span> Load
+            </button>
+            <div class="tb-divider"></div>
+            <button id="btn-clear" class="tb-btn" title="Clear Canvas">
+                <span>🗑️</span> Clear
+            </button>
+            <button id="btn-execute" class="tb-btn tb-btn-primary" title="Execute Pipeline (Ctrl+Enter)">
+                <span>▶</span> Execute
+            </button>
+        </div>
+        <div class="topbar-right">
+            <div id="zoom-controls">
+                <button id="btn-zoom-out" class="zoom-btn" title="Zoom Out (Ctrl+-)">−</button>
+                <span id="zoom-level">100%</span>
+                <button id="btn-zoom-in" class="zoom-btn" title="Zoom In (Ctrl+=)">+</button>
+                <button id="btn-zoom-fit" class="zoom-btn zoom-btn-fit" title="Fit View (Ctrl+0)">⊡</button>
+            </div>
+            <span id="status-indicator" class="status-idle">Ready</span>
+        </div>
+    </header>
+
+    <!-- Main Layout -->
+    <div id="main">
+        <!-- Left Sidebar: Node Palette -->
+        <aside id="sidebar">
+            <div class="sidebar-header">
+                <h3>Components</h3>
+                <input type="text" id="node-search" placeholder="Search nodes..." />
+            </div>
+            <div id="node-palette"></div>
+        </aside>
+
+        <!-- Center: Canvas -->
+        <div id="canvas-container">
+            <svg id="connections-svg"></svg>
+            <div id="canvas"></div>
+            <div id="canvas-hint">
+                <p>Drag components from the left panel to start building your pipeline</p>
+            </div>
+            <!-- Minimap -->
+            <div id="minimap">
+                <canvas id="minimap-canvas"></canvas>
+                <div id="minimap-viewport"></div>
+            </div>
+        </div>
+
+        <!-- Right Panel: Properties / Results -->
+        <aside id="right-panel">
+            <div class="panel-tabs">
+                <button class="panel-tab active" data-tab="properties">Properties</button>
+                <button class="panel-tab" data-tab="results">Results</button>
+            </div>
+            <div id="tab-properties" class="tab-content active">
+                <div id="properties-empty">
+                    <p>Select a node to edit its properties</p>
+                </div>
+                <div id="properties-form" style="display:none">
+                    <h4 id="prop-node-title"></h4>
+                    <p id="prop-node-desc" class="prop-desc"></p>
+                    <div id="prop-fields"></div>
+                </div>
+            </div>
+            <div id="tab-results" class="tab-content">
+                <div id="results-empty">
+                    <p>Execute a pipeline to see results</p>
+                </div>
+                <div id="results-content" style="display:none">
+                    <div id="results-metrics"></div>
+                    <div id="results-logs"></div>
+                    <div id="results-details"></div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Hidden inputs -->
+    <input type="file" id="file-upload" style="display:none" accept=".csv,.xlsx,.xls,.json" />
+    <input type="file" id="pipeline-upload" style="display:none" accept=".adamops,.json" />
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

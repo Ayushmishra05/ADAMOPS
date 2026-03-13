@@ -9,12 +9,13 @@ AdamOps provides tools for:
 - Deployment to various platforms
 - Monitoring and drift detection
 - Pipeline orchestration
+- Visual pipeline builder (Studio)
 
 Author: AdamOps Team
-Version: 0.1.0
+Version: 0.1.1
 """
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 __author__ = "AdamOps Team"
 
 # Import core modules for easy access

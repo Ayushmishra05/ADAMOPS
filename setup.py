@@ -23,17 +23,17 @@ def read_requirements():
 
 setup(
     name="adamops",
-    version="0.1.0",
-    author="AdamOps Team",
-    author_email="adamops@example.com",
+    version="0.1.1",
+    author="Team ADAM",
+    author_email="ayush89718@gmail.com",
     description="A comprehensive MLOps library for end-to-end machine learning workflows",
     long_description=read_readme(),
     long_description_content_type="text/markdown",
-    url="https://github.com/adamops/adamops",
+    url="https://github.com/Ayushmishra05/ADAMOPS",
     project_urls={
-        "Bug Tracker": "https://github.com/adamops/adamops/issues",
-        "Documentation": "https://adamops.readthedocs.io",
-        "Source Code": "https://github.com/adamops/adamops",
+        "Bug Tracker": "https://github.com/Ayushmishra05/ADAMOPS/issues",
+        "Documentation": "https://github.com/Ayushmishra05/ADAMOPS#readme",
+        "Source Code": "https://github.com/Ayushmishra05/ADAMOPS",
     },
     packages=find_packages(exclude=["tests", "tests.*", "examples", "docs"]),
     classifiers=[

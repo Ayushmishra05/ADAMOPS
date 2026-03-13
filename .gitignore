@@ -170,3 +170,13 @@ temp/
 
 # Registry database
 .adamops_registry/
+
+# AdamOps specific
+*.adamops
+adamops-docs/
+
+# Scratch/Test files
+test1.py
+test_playground.py
+examples/quick_start2.py
+

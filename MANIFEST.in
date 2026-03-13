@@ -1,0 +1,23 @@
+include LICENSE
+include README.md
+include requirements.txt
+include pyproject.toml
+
+recursive-include adamops *.py
+recursive-include adamops/studio/static *
+recursive-include examples *.py *.md
+recursive-include docs *.md *.rst
+
+prune venv
+prune .git
+prune build
+prune dist
+prune *.egg-info
+prune __pycache__
+prune .pytest_cache
+
+global-exclude *.pyc
+global-exclude __pycache__
+global-exclude *.egg-info
+global-exclude .git*
+global-exclude .DS_Store
