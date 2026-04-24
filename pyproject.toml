@@ -51,6 +51,7 @@ dependencies = [
     "pyyaml>=6.0.0",
     "click>=8.1.0",
     "rich>=13.5.0",
+    "jinja2>=3.1.0",
 ]
 
 [project.optional-dependencies]
@@ -66,9 +67,17 @@ api = [
     "uvicorn>=0.22.0",
     "flask>=2.3.0",
     "streamlit>=1.25.0",
+    "websockets>=11.0",
+    "jinja2>=3.1.0",
+]
+backend = [
+    "fastapi>=0.100.0",
+    "uvicorn>=0.22.0",
+    "websockets>=11.0",
 ]
 automl = [
     "optuna>=3.0.0",
+    "ray[tune]>=2.5.0",
 ]
 explainability = [
     "shap>=0.41.0",
@@ -81,8 +90,17 @@ export = [
 tracking = [
     "mlflow>=2.5.0",
 ]
+colab = [
+    "requests>=2.28.0",
+    "websocket-client>=1.5.0",
+]
+distributed = [
+    "torch>=2.0.0",
+    "ray[train]>=2.5.0",
+]
 all = [
     "optuna>=3.0.0",
+    "ray[tune]>=2.5.0",
     "shap>=0.41.0",
     "lime>=0.2.0",
     "onnx>=1.14.0",
@@ -92,6 +110,11 @@ all = [
     "flask>=2.3.0",
     "streamlit>=1.25.0",
     "mlflow>=2.5.0",
+    "websockets>=11.0",
+    "jinja2>=3.1.0",
+    "requests>=2.28.0",
+    "websocket-client>=1.5.0",
+    "torch>=2.0.0",
 ]
 
 [project.scripts]

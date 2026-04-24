@@ -2,7 +2,7 @@
 
 [![Python Version](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://python.org)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.1.0-orange.svg)](https://github.com/adamops/adamops)
+[![Version](https://img.shields.io/badge/version-0.1.1-orange.svg)](https://github.com/adamops/adamops)
 
 
 
@@ -42,9 +42,16 @@
 - **Alerts**: Performance degradation notifications
 - **Dashboards**: Real-time monitoring dashboards
 
-### 🔄 Pipelines Module
+### 🔄 Pipelines & Backend
 - **Workflows**: End-to-end ML workflows as DAGs
-- **Orchestration**: Scheduling and pipeline execution
+- **Backend Engine**: FastAPI-based REST API with real-time WebSocket event streaming and SQLite persistence.
+- **Visual Studio & Compiler**: Design pipelines visually and compile DAGs natively into executable Python code using Jinja2 templates.
+
+### 🌐 Colab Bridge & Distributed Training
+- **Remote GPU Execution**: Instantly delegate local `.py` and `.ipynb` execution to high-performance Google Colab runtimes via Jupyter kernel gateway.
+- **Zero-Config Hardware Abstraction**: Our unified `Trainer` class automatically detects CUDA, MPS, and CPU, handling VRAM pre-flight checks to prevent OOM kernel crashes.
+- **Elastic Distributed Training**: Native PyTorch DDP for Multi-GPU, Ray Train for Multi-Node clusters, and parallel Joblib for async sklearn bagging.
+- **Ephemeral Storage Protection**: Auto-routes deep learning checkpoints to Google Drive when running in Colab.
 
 ## 🛠️ Installation
 
@@ -146,6 +153,22 @@ results = metrics.evaluate(y_true, y_pred, task="classification")
 print(results)
 ```
 
+### Distributed & Colab GPU Training
+```python
+from adamops.trainer import Trainer
+
+# Instantly auto-discovers CUDA, validates Colab VRAM, 
+# and wraps in PyTorch DDP / Ray Train if requested.
+trainer = Trainer(pytorch_model, strategy="auto", task="classification")
+trainer.fit(X_train, y_train, epochs=20)
+
+# Transparently routes outputs back to CPU memory
+predictions = trainer.predict(X_test)
+
+# Saves securely to Google Drive if in a Colab environment
+trainer.save()
+```
+
 ### CLI Usage
 ```bash
 # Train a model
@@ -165,6 +188,19 @@ adamops/
 ├── adamops/
 │   ├── __init__.py
 │   ├── cli.py
+│   ├── hardware.py
+│   ├── distributed.py
+│   ├── trainer.py
+│   ├── backend/
+│   │   ├── app.py
+│   │   ├── database.py
+│   │   └── runner.py
+│   ├── colab/
+│   │   ├── bridge.py
+│   │   └── setup_snippet.py
+│   ├── studio/
+│   │   ├── compiler.py
+│   │   └── server.py
 │   ├── data/
 │   │   ├── loaders.py
 │   │   ├── validators.py

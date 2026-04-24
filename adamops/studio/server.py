@@ -66,6 +66,22 @@ def create_app():
             logger.error(f"Pipeline execution error: {e}")
             return jsonify({"error": str(e), "success": False}), 500
 
+    @app.route("/api/export", methods=["POST"])
+    def export():
+        """Export a pipeline to a raw executable Python script."""
+        try:
+            from adamops.studio.compiler import compile_pipeline
+            pipeline_data = request.get_json()
+            if not pipeline_data:
+                return jsonify({"error": "No pipeline data provided"}), 400
+            
+            script_code = compile_pipeline(pipeline_data)
+            return jsonify({"code": script_code, "success": True})
+            
+        except Exception as e:
+            logger.error(f"Pipeline compilation error: {e}")
+            return jsonify({"error": str(e), "success": False}), 500
+
     @app.route("/api/upload", methods=["POST"])
     def upload_file():
         """Upload a data file."""
