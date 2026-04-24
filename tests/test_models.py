@@ -107,7 +107,7 @@ class TestAutoML:
     def test_automl_quick(self, classification_data):
         X, y = classification_data
         
-        result = run_automl(X, y, task='classification', tuning='none', n_trials=5)
+        result = run_automl(X, y, task='classification', backend='local', n_trials=5)
         
         assert result.best_model is not None
         assert result.best_score > 0

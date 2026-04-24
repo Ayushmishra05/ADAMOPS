@@ -8,9 +8,25 @@ Usage:
     results = launch()
 """
 
-if "launch" not in locals():
-    from . import launch
+import importlib
 
-from .launcher import launch
 
-__all__ = ["launch"]
+def __getattr__(name):
+    if name in ["launch", "execute_pipeline", "compile_pipeline"]:
+        if name == "launch":
+            mod = importlib.import_module(".launcher", __name__)
+            return getattr(mod, name)
+        elif name == "execute_pipeline":
+            mod = importlib.import_module(".engine", __name__)
+            return getattr(mod, name)
+        elif name == "compile_pipeline":
+            mod = importlib.import_module(".compiler", __name__)
+            return getattr(mod, name)
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+
+
+def __dir__():
+    return ["launch", "execute_pipeline", "compile_pipeline"]
+
+
+__all__ = ["launch", "execute_pipeline", "compile_pipeline"]

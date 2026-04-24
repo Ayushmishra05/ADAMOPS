@@ -9,11 +9,15 @@ Provides model deployment capabilities:
 - playground: Interactive Streamlit UI for model testing
 """
 
-from . import api
-from . import containerize
-from . import cloud
-from . import exporters
-from . import playground
+import importlib
+
+def __getattr__(name):
+    if name in ["exporters", "api", "containerize", "cloud", "playground"]:
+        return importlib.import_module(f".{name}", __name__)
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+
+def __dir__():
+    return ["exporters", "api", "containerize", "cloud", "playground"]
 
 __all__ = [
     "exporters",

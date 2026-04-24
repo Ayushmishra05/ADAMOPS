@@ -15,6 +15,7 @@ from adamops.data.splitters import split_train_test, split_train_val_test
 @pytest.fixture
 def sample_df():
     """Create sample DataFrame for testing."""
+    np.random.seed(42)  # Deterministic tests
     return pd.DataFrame({
         'id': range(100),
         'numeric': np.random.randn(100),

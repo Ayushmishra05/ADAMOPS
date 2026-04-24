@@ -20,7 +20,7 @@ if CLICK_AVAILABLE:
     console = Console()
     
     @click.group()
-    @click.version_option(version="0.1.0", prog_name="adamops")
+    @click.version_option(version="0.1.1", prog_name="adamops")
     def main():
         """AdamOps - MLOps made simple."""
         pass
@@ -163,6 +163,57 @@ if CLICK_AVAILABLE:
         from adamops.studio import launch
         console.print("[bold magenta]Launching AdamOps Studio...[/]")
         launch(host=host, port=port, open_browser=not no_browser)
+
+    @main.command()
+    @click.option("--host", default="127.0.0.1", help="Server host")
+    @click.option("--port", "-p", default=8000, type=int, help="Server port")
+    @click.option("--db", default="adamops_state.db", help="Path to SQLite state database")
+    def server(host, port, db):
+        """Start the AdamOps backend engine (FastAPI + WebSocket)."""
+        from adamops.backend.launcher import launch as launch_server
+        console.print("[bold cyan]Starting AdamOps Backend Engine...[/]")
+        launch_server(host=host, port=port, db_path=db)
+
+    @main.command(name="colab-setup")
+    def colab_setup():
+        """Print the Colab setup snippet to paste into a Colab cell."""
+        from adamops.colab.setup_snippet import setup_colab
+        setup_colab()
+
+    @main.command(name="colab-run")
+    @click.argument("file_path")
+    @click.option("--url", required=True, help="Colab kernel gateway URL")
+    @click.option("--token", default="", help="Gateway authentication token")
+    @click.option("--timeout", default=300, type=int, help="Execution timeout in seconds")
+    def colab_run(file_path, url, token, timeout):
+        """Execute a .py or .ipynb file on a remote Colab GPU."""
+        from adamops.colab.bridge import ColabBridge
+        bridge = ColabBridge(url, token=token)
+
+        console.print(f"[bold cyan]Connecting to Colab at {url}...[/]")
+        status = bridge.status()
+        gpu = status.get("gpu_name", "CPU")
+        console.print(f"[green]Connected! Runtime: {gpu}[/]")
+
+        if file_path.endswith(".ipynb"):
+            console.print(f"[bold blue]Running notebook: {file_path}[/]")
+            results = bridge.run_notebook(file_path, timeout=timeout)
+            passed = sum(1 for r in results if r.success)
+            console.print(f"[bold green]Done: {passed}/{len(results)} cells passed[/]")
+            for i, r in enumerate(results):
+                if r.stdout.strip():
+                    console.print(f"[dim]Cell {i+1} stdout:[/] {r.stdout.strip()[:200]}")
+                if not r.success:
+                    console.print(f"[bold red]Cell {i+1} error: {r.error_name}: {r.error_value}[/]")
+        else:
+            console.print(f"[bold blue]Running script: {file_path}[/]")
+            result = bridge.run_script(file_path, timeout=timeout)
+            if result.success:
+                console.print(f"[bold green]✅ Completed in {result.elapsed:.2f}s[/]")
+            else:
+                console.print(f"[bold red]❌ {result.error_name}: {result.error_value}[/]")
+            if result.stdout.strip():
+                console.print(result.stdout)
 
 else:
     def main():
